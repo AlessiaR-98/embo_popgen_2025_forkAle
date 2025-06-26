@@ -15,7 +15,7 @@ rm(list=ls());
 # given two populations A and B, create a new Admix pop by admixture with 
 # proportions pa and 1-pa.
 
-folder.fastSimcoal2 <- "C:\\Users\\u9424\\OneDrive - Universitat Pompeu Fabra\\Grants\\2025\\EMBO Naples June\\Second day\\";
+folder.fastSimcoal2 <- "/home/riccardi/POPGEN_git/embo_popgen_2025_forkAle/Oscar_Lao/morning/";
 
 setwd(folder.fastSimcoal2);
 
@@ -63,12 +63,12 @@ model.admixed.pop <- function(sample_1, sample_2, sample_admix, effective_popula
   # Write to file
   writeLines(lines, "DemographicModelSplitR.par")
   
-  exe <- ".\\fsc28.exe"
-  args <- c("-i", ".\\DemographicModelSplitR.par", "-x", "-s0", "-d", "-n", "1", "-q", "-G")
+  exe <- "fsc28"
+  args <- c("-i", "DemographicModelSplitR.par", "-x", "-s0", "-d", "-n", "1", "-q", "-G")
   # Execute
   system2(exe, args = args)
   
-  data.t <- read.table(file=paste(folder.fastSimcoal2,"\\DemographicModelSplitR\\DemographicModelSplitR_1_1.gen", sep=""), header = T);
+  data.t <- read.table(file=paste(folder.fastSimcoal2,"DemographicModelSplitR/DemographicModelSplitR_1_1.gen", sep=""), header = T);
   
   # First four columns are snp info
   # haplotype matrix. Rows are haplotypes, columns are positions
