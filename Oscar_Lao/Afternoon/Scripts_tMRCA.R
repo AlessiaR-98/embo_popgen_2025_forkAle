@@ -1,6 +1,6 @@
 rm(list=ls());
 
-folder.fastSimcoal2 <- "C:\\Users\\u9424\\OneDrive - Universitat Pompeu Fabra\\Grants\\2025\\EMBO Naples June\\Second day\\Afternoon\\Practical\\";
+folder.fastSimcoal2 <- "/home/riccardi/POPGEN_git/embo_popgen_2025_forkAle/Oscar_Lao/Afternoon/";
 
 setwd(folder.fastSimcoal2);
 
@@ -44,18 +44,19 @@ model.single.pop.with.recent.population.change.tMRCA <- function(population_size
   }
 
   # Write to file
-  writeLines(lines, "DemographicModelSplitR.par")
+  writeLines(lines, paste0(folder.fastSimcoal2,"DemographicModelSplitR.par"))
   
-  exe <- ".\\fsc28.exe"
-  args <- c("-i", ".\\DemographicModelSplitR.par", "-x", "-s0", "-n", "1", "-q", "--recordMRCA")
+  exe <- "fsc28"
+  args <- c("-i", paste0(folder.fastSimcoal2,"DemographicModelSplitR.par"), "-x", "-s0", "-n", "1", "-q", "--recordMRCA")
   # Execute
   system2(exe, args = args);
-  data.t <- read.table(file=paste(folder.fastSimcoal2,"\\DemographicModelSplitR\\DemographicModelSplitR_mrca.txt", sep=""), header = T, skip = 4);
+  data.t <- read.table(file=paste0(folder.fastSimcoal2, "DemographicModelSplitR/DemographicModelSplitR_mrca.txt", sep=""), header = T, skip = 4);
   return(data.t);
 }
 
 # Example of execution
-data <- model.single.pop.with.recent.population.change.tMRCA(10000, 1000, 500, 1000)
+#data <- model.single.pop.with.recent.population.change.tMRCA(10000, 1000, 500, 1000)
+data <- model.single.pop.with.recent.population.change.tMRCA(10000, 1000, 500, 10000) #with 10000 loci
 hist(data$Time_.gen., breaks = 50, col = "skyblue", main = "TMRCA Distribution", xlab = "Generations")
 abline(v = mean(data$Time_.gen.), col = "red", lwd = 2)
 
