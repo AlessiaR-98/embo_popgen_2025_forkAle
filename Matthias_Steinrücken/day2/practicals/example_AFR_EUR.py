@@ -1,17 +1,17 @@
-
+#this is another demography
 
 import msprime
 import demesdraw
 from matplotlib import pyplot as plt
 
-# add demography
+# add demography of 2 populations
 demography = msprime.Demography()
 demography.add_population(name="AFR", initial_size=30_000)
 demography.add_population(name="EUR", initial_size=20_000)
 
 # instantaneous reduction of size 
 demography.add_population_parameters_change(population="EUR", time=100, initial_size=10_000)
-
+#ANC is the ancestral population from which AFR and EUR come
 demography.add_population(name="ANC", initial_size=50_000)
 demography.add_population_split(time=2000, derived=["AFR", "EUR"], ancestral="ANC") # split 2k generations ago
 
@@ -21,7 +21,7 @@ demography.add_population_parameters_change(time=4000, population="ANC", initial
 # instantaneous bottleneck
 print(demography)
 
-# Plot a schematic of the model
+# Plot a schematic of the model/demography object
 plt.clf()
 demesdraw.tubes(demography.to_demes(), ax=plt.gca(), seed=1, log_time=True)
 plt.show()

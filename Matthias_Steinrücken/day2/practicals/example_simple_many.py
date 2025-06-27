@@ -2,7 +2,7 @@ import msprime
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
-
+#in this case samples are simulated many times, it's the same of example_simple_one, but made many times
 def repeat_simulations(mut, sample_sizes, length, reco, pop_size, num_simulations, seed=None):
     results = []
     for i in tqdm(range(num_simulations), desc="Running simulations"): 
@@ -36,7 +36,7 @@ num_simulations = 100
 results = repeat_simulations(mut, sample_sizes, length, reco, pop_size, num_simulations, seed=seed)
 
 
-# plot 
+# plot, for each time I repeated the simulation I calculated the diversities, the tajimas_ds and the allele_frequency_spectra
 diversities = [result[2] for result in results]
 tajimas_ds = [result[3] for result in results]
 allele_frequency_spectra = [result[4] for result in results]

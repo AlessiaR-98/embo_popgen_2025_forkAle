@@ -79,7 +79,21 @@ Plot the posterior probability, assuming a uniform prior (alpha = beta = 1). The
 What happens to the distribution if we have only 10 samples (with the sample allele frequency of 0.20)?
 
 ```{r}
-#...
+n <- 200
+k <- 40
+xs <- seq(0,1,0.01)
+Y <- dbeta(xs,k+1,n-k+1) #if we set alfa=beta=1 our posterior distribution is Beta(k+1,n-k+1)
+
+plot(xs, Y, type = "l")
+
+#MAP <- (alpha -1)/(alpha + beta -2) you can check in wikipedia
+
+xs_new <- seq(0,95,0.01)
+maxY <- dbeta(xs_new,k+1,n-k+1)
+
+#in this case we estimate everything from the data that we have and not from the prior probability. We wanna set the prior in order to define that the probability that the derived allele frequency was higher is very low.
+
+#Check the solutions
 ```
 
 We can think of a more informative prior.
